@@ -4,7 +4,8 @@
   "description": "Getting started with React - following along with www.reacttraining.com and seeing how far I can go.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --open"
   },
   "repository": {
     "type": "git",
@@ -14,6 +15,12 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/cynhw/react-training/issues"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ]
   },
   "homepage": "https://github.com/cynhw/react-training#readme",
   "dependencies": {
