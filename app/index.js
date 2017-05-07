@@ -1,21 +1,8 @@
 var React = require('react');
 var ReactDom = require('react-dom');
+// var PropTypes = require('prop-types');
 require('./index.css');
-
-// Compenent Definition
-
-class App extends React.Component {
-	// whatever is rendering would be the UI of the component
-	render() {
-		return (
-			<div>
-				Hello World
-			</div>
-
-			// gives us JSX to write out the UI
-			)
-	}
-}
+var App = require('./components/App');
 
 // here, we render the component to the DOM
 
