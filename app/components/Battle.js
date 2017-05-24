@@ -7,9 +7,10 @@ class PlayerInput extends React.Component {
 
 		this.state = {
 			username: ''
-		}
+		};
 
 		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 
 	}
 
@@ -21,7 +22,7 @@ handleChange(event) {
 			username: value
 			// this will update the input field
 		}
-	})
+	});
 }
 
 handleSubmit(event) {
@@ -30,62 +31,61 @@ handleSubmit(event) {
 	this.props.onSubmit(
 		this.props.id,
 		this.state.username
-	)
+	);
 }
 
 	render() {
 		return (
-			<form className="column" onSubmit={this.handleSubmit()}>
-				<label className="header" htmlFor="username">
-					{this.props.label}
-				</label>
+			<form className="column" onSubmit={this.handleSubmit}>
+				<label className="header" htmlFor="username">{this.props.label}</label>
 				<input 
 					id="username"
 					placeholder="github username"
 					type="text"
-					autoComplete="off"
 					value={this.state.username}
+					autoComplete="off"
 					onChange={this.handleChange}
 					/>
+				<button
+					className="button"
+					type="submit"
+					disabled={!this.state.username}>
+					Submit
+				</button>
 			</form>
-			<button
-				className="button"
-				type="submit"
-				disable={!this.state.username}>
-				Submit
-			</button>
 			)
 	}
 }
 
 PlayerInput.propTypes = {
 	id: PropTypes.string.isRequired,
-	lable: PropTypes.string.isRequired,
-	onSubmit: PropTypes.func.isRequired
+	label: PropTypes.string.isRequired,
+	onSubmit: PropTypes.func.isRequired,
+}
+
+PlayerInput.defaultProps = {
+	label: 'Username',
 }
 
 class Battle extends React.Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			playerOneName: '',
 			playerTwoName: '',
 			playerOneImage: null,
-			playerTwoImage: null
-		}
+			playerTwoImage: null,
+		};
 
 		this.handleSubmit = this.handleSubmit.bind(this);
 
 	}
 
-	// create the function where the child would change the state in the parent
-
 	handleSubmit(id, username) {
 		this.setState(function() {
 			var newState = {};
 			newState[id + 'Name'] = username;
-			newState[id + 'Image'] = 'https://github.com/' + username + '.png?size=200';
+			newState[id + 'Image'] = 'https://github.com/' + username + '.png?size=200'
 			return newState;
 		});
 	}
@@ -93,21 +93,21 @@ class Battle extends React.Component {
 	render() {
 		var playerOneName = this.state.playerOneName;
 		var playerTwoName = this.state.playerTwoName;
-		return(
+		return (
 			<div>
 				<div className="row">
 					{!playerOneName && 
 						<PlayerInput 
 							id="playerOne"
 							label="Player One"
-							onSubmit={this.handleSubmit()}
+							onSubmit={this.handleSubmit}
 						/>}
 
 					{!playerTwoName && 
 						<PlayerInput 
 							id="playerTwo"
 							label="Player Two"
-							onSubmit={this.handleSubmit()}
+							onSubmit={this.handleSubmit}
 						/>}
 				</div>
 			</div>
